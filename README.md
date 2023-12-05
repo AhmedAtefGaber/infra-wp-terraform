@@ -1,7 +1,7 @@
-## Provision infrastructure on AWS using Terraform  
+## Provisioning infrastructure on AWS using Terraform  
 This project is intended to provision a whole infrastructure on AWS for a containerized application.
 
-######The structure of the project is divided into infra and modules.
+###### The structure of the project is divided into infra and modules.
 ### [infra](./infra/): 
 This is where we define all the resources will be deployed from VPC, Subnets, IGW, NAtT gateway, EKS,...etc.
 ### [modules](./modules/): 
