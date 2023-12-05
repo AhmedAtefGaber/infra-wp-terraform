@@ -1,0 +1,29 @@
+---
+  - name: prepare client
+    hosts: localhost
+    connection: local
+    become: yes
+    tasks:
+    - name: Add users
+      ansible.builtin.user:
+        name: "{{ item.user_name }}"
+      loop: "{{ users_keys }}"
+      
+    - name: Create .ssh directory
+      ansible.builtin.file:
+        state: directory
+        path: /home/{{ item.user_name }}/.ssh
+        mode: '0700'
+        owner: "{{ item.user_name }}"
+        group: "{{ item.user_name }}"
+      loop: "{{ users_keys }}"
+
+    - name: Copy using inline content
+      ansible.builtin.copy:
+        content: "{{ item.user_key }}"
+        dest: /home/{{ item.user_name }}/.ssh/authorized_keys
+        mode: '600'
+        owner: "{{ item.user_name }}"
+        group: "{{ item.user_name }}"
+      loop: "{{ users_keys }}"
+         
